@@ -11507,11 +11507,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/allencho/ASP.NET/GithubApi/GithubApi.csproj",
+      "projectUniqueName": "/Users/allencho/ASP.NET/github_api/GithubApi.csproj",
       "projectName": "GithubApi",
-      "projectPath": "/Users/allencho/ASP.NET/GithubApi/GithubApi.csproj",
+      "projectPath": "/Users/allencho/ASP.NET/github_api/GithubApi.csproj",
       "packagesPath": "/Users/allencho/.nuget/packages/",
-      "outputPath": "/Users/allencho/ASP.NET/GithubApi/obj/",
+      "outputPath": "/Users/allencho/ASP.NET/github_api/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
