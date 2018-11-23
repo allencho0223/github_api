@@ -1,8 +1,14 @@
+// Acknowledgement
+// https://blog.teamtreehouse.com/code-a-simple-github-api-webapp-using-jquery-ajax
+
 $(function(){
     $('#search').on('click', function(e){
       e.preventDefault();
       
+      // Get username from input box
       var username = $('#userAccount').val();
+
+      // Set the URIs
       var requri = 'https://api.github.com/users/' + username;
       var repouri = 'https://api.github.com/users/' + username + '/repos';
       
@@ -25,6 +31,7 @@ $(function(){
             name = login;
           }
 
+          // Display user details on the page
           var outhtml = '</br>' + 
                         '<div class="container">' +
                           '<div class="row">' +
@@ -65,14 +72,16 @@ $(function(){
                             '</div>' +
                             '<div class="col-lg-8"><span class="pFont">' + reposnum +
                             '</span></div>' +
-                          '</div>'; // end of container
+                          '</div>'; // end of fifth row
           
+          // Get repositories                
           var repositories;
           $.getJSON(repouri, function(json){
             repositories = json;   
             outputPageContent();                
           });          
           
+          // Display repo details
           function outputPageContent() {
             if(repositories.length == 0) {
               outhtml = outhtml + '<h2 class="subheadingFont">No repos!</h2></div>';
@@ -84,8 +93,6 @@ $(function(){
                                       '</br><span class="descFont">' + repositories[index].description + '</span></br></br>' + 
                                       '<span class="descFont">' + repositories[index].language + '</span>' +
                                     '</div>';
-
-                // outhtml = outhtml + '<li><a href="'+repositories[index].html_url+'" target="_blank">'+repositories[index].name + '</a></li>';
               });
               outhtml = outhtml + '</div>'; 
             }

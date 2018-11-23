@@ -9,3 +9,6 @@ Language
 
 Framework
   - ASP.NET Core MVC
+
+Acknowledgement
+  - All image files are only used for non-profitable purposes
