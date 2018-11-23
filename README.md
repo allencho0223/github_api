@@ -9,4 +9,3 @@ Language
 
 Framework
   - ASP.NET Core MVC
-  
