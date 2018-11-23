@@ -3,6 +3,14 @@ for details on configuring this project to bundle and minify static web assets. 
 body {
     padding-top: 50px;
     padding-bottom: 20px;
+    
+    
+}
+
+.bgImage {
+    width: 100%;
+    height: 100%;
+    background-image: url("../images/bg.png");
 }
 
 /* Wrapping element */
@@ -10,6 +18,32 @@ body {
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+}
+
+.headingFont {
+    font-family: 'Black Han Sans', sans-serif;
+    font-size: 30px;
+    color: gainsboro;
+}
+
+.subheadingFont {
+    font-size: 30px;
+    color: gainsboro;
+}
+
+.pFont {
+    font-size: 20px;
+    color: gainsboro;
+}
+
+.descFont {
+    font-size: 15px;
+    color: gainsboro;
+}
+
+div.repoBorder {
+    border-style: outset;
+    border-color: gray;
 }
 
 /* Carousel */

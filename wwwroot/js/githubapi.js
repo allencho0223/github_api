@@ -1,34 +1,71 @@
 $(function(){
     $('#search').on('click', function(e){
       e.preventDefault();
-      $('#apiData').html('<div id="loader"><img src="css/loader.gif" alt="loading..."></div>');
       
       var username = $('#userAccount').val();
-      var requri   = 'https://api.github.com/users/'+username;
-      var repouri  = 'https://api.github.com/users/'+username+'/repos';
+      var requri = 'https://api.github.com/users/' + username;
+      var repouri = 'https://api.github.com/users/' + username + '/repos';
       
       requestJSON(requri, function(json) {
         if(json.message == "Not Found" || username == '') {
-          $('#apiData').html("<h2>No User Info Found</h2>");
-        }
-        
-        else {
+          $('#apiData').html("<h2 class=\"subheadingFont\">No User Info Found</h2>");
+        } else {
           // else we have a user and we display their info
-          var fullname   = json.name;
-          var username   = json.login;
-          var aviurl     = json.avatar_url;
+          var name = json.name;
+          var login = json.login;
+          var avatar = json.avatar_url;
           var profileurl = json.html_url;
-          var location   = json.location;
-          var followersnum = json.followers;
-          var followingnum = json.following;
-          var reposnum     = json.public_repos;
+          var location = json.location;
+          var followers = json.followers;
+          var following = json.following;
+          var reposnum = json.public_repos;
+          var bio = json.bio;
           
-          if(fullname == undefined) { fullname = username; }
-          
-          var outhtml = '<h2>'+fullname+' <span class="smallname">(<a href="'+profileurl+'" target="_blank">'+username+'</a>)</span></h2>';
-          outhtml = outhtml + '<div class="ghcontent"><div class="avi"><a href="'+profileurl+'" target="_blank"><img src="'+aviurl+'" width="80" height="80" alt="'+username+'"></a></div>';
-          outhtml = outhtml + '<p>Followers: '+followersnum+' - Following: '+followingnum+'<br>Repos: '+reposnum+'</p></div>';
-          outhtml = outhtml + '<div class="repolist clearfix">';
+          if(name == undefined) {
+            name = login;
+          }
+
+          var outhtml = '</br>' + 
+                        '<div class="container">' +
+                          '<div class="row">' +
+                            '<div class="col-lg-4">' +
+                              '<a href="' + profileurl + '" target="_blank">' +
+                                '<img src="' + avatar + '" width="260" height="260" alt="' + login + '">' +
+                              '</a>' +
+                            '</div>' +
+                            '<div class="col-lg-8">' + 
+                              '<p class="subheadingFont">' + name + '</br><a href="' + profileurl + 'target="_blank">' + login + '</a></p>' +
+                              '<span class="pFont">' + bio + '</span>' +
+                            '</div>' + 
+                          '</div>' + // end of first row
+                          '<div class="row">' + 
+                            '<div class="col-lg-4">' + 
+                              '<span class="pFont">Location</span>' +
+                            '</div>' +
+                            '<div class="col-lg-8"><span class="pFont">' + location +
+                            '</span></div>' +
+                          '</div>' + // end of second row
+                          '<div class="row">' + 
+                            '<div class="col-lg-4">' + 
+                              '<span class="pFont">Follower</span>' +
+                            '</div>' +
+                            '<div class="col-lg-8"><span class="pFont">' + followers +
+                            '</span></div>' +
+                          '</div>' + //end of third row
+                          '<div class="row">' + 
+                            '<div class="col-lg-4">' + 
+                              '<span class="pFont">Following</span>' +
+                            '</div>' +
+                            '<div class="col-lg-8"><span class="pFont">' + following +
+                            '</span></div>' +
+                          '</div>' + //end of fourth row
+                          '<div class="row">' + 
+                            '<div class="col-lg-4">' + 
+                              '<span class="pFont">Repositories</span>' +
+                            '</div>' +
+                            '<div class="col-lg-8"><span class="pFont">' + reposnum +
+                            '</span></div>' +
+                          '</div>'; // end of container
           
           var repositories;
           $.getJSON(repouri, function(json){
@@ -37,13 +74,20 @@ $(function(){
           });          
           
           function outputPageContent() {
-            if(repositories.length == 0) { outhtml = outhtml + '<p>No repos!</p></div>'; }
-            else {
-              outhtml = outhtml + '<p><strong>Repos List:</strong></p> <ul>';
+            if(repositories.length == 0) {
+              outhtml = outhtml + '<h2 class="subheadingFont">No repos!</h2></div>';
+            } else {
+              outhtml = outhtml + '</br><div class="row">';
               $.each(repositories, function(index) {
-                outhtml = outhtml + '<li><a href="'+repositories[index].html_url+'" target="_blank">'+repositories[index].name + '</a></li>';
+                outhtml = outhtml + '<div class="col-lg-6 repoBorder" style="height: 150px">' + 
+                                      '<a href="' + repositories[index].html_url + '" target="_blank" style="font-size: 20px">' + repositories[index].name + '</a>' +
+                                      '</br><span class="descFont">' + repositories[index].description + '</span></br></br>' + 
+                                      '<span class="descFont">' + repositories[index].language + '</span>' +
+                                    '</div>';
+
+                // outhtml = outhtml + '<li><a href="'+repositories[index].html_url+'" target="_blank">'+repositories[index].name + '</a></li>';
               });
-              outhtml = outhtml + '</ul></div>'; 
+              outhtml = outhtml + '</div>'; 
             }
             $('#apiData').html(outhtml);
           } // end outputPageContent()

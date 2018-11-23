@@ -10,10 +10,6 @@ namespace GithubApi.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
         public IActionResult GithubApi() {
             return View();
         }

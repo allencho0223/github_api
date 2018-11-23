@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace GithubApi
+namespace github_api
 {
     public class Startup
     {
@@ -56,7 +56,7 @@ namespace GithubApi
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=GithubApi}/{id?}");
             });
         }
     }
